@@ -11,7 +11,11 @@
 	) {
 
 		try {
-			$test = NEW PDO("mysql:host=" . $_POST["host"] . ";dbname=" . $_POST["database"] . ";charset=utf8", $_POST["user"], $_POST["pass"], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+			$options = array(
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+			);
+			$test = NEW PDO("mysql:host=" . $_POST["host"] . ";dbname=" . $_POST["database"] . ";charset=utf8mb4", $_POST["user"], $_POST["pass"], $options);
 
 			$configFile = '<?php
 
@@ -46,25 +50,30 @@
 		failed(1, "Database Login");
 		echo '<div class="alert alert-danger"><strong>Connection Error:</strong> ' . $e->getMessage() . '</div>';
 
+		$host = isset($_POST["host"]) ? htmlspecialchars($_POST["host"]) : "localhost";
+		$user = isset($_POST["user"]) ? htmlspecialchars($_POST["user"]) : "";
+		$pass = isset($_POST["pass"]) ? htmlspecialchars($_POST["pass"]) : "";
+		$database = isset($_POST["database"]) ? htmlspecialchars($_POST["database"]) : "";
+
 		echo '
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form method="post" action="#">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Hostname</label>
-							<input type="text" class="form-control" name="host" value="<?php echo isset($_POST["host"]) ? htmlspecialchars($_POST["host"]) : "localhost"; ?>">
+							<input type="text" class="form-control" name="host" value="' . $host . '">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Username</label>
-							<input type="text" class="form-control" name="user" value="<?php echo isset($_POST["user"]) ? htmlspecialchars($_POST["user"]) : ""; ?>">
+							<input type="text" class="form-control" name="user" value="' . $user . '">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Password</label>
-							<input type="password" class="form-control" name="pass" value="<?php echo isset($_POST["pass"]) ? htmlspecialchars($_POST["pass"]) : ""; ?>">
+							<input type="password" class="form-control" name="pass" value="' . $pass . '">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Database</label>
-							<input type="text" class="form-control" name="database" value="<?php echo isset($_POST["database"]) ? htmlspecialchars($_POST["database"]) : ""; ?>">
+							<input type="text" class="form-control" name="database" value="' . $database . '">
 						</div>
 						<div class="text-right">
 							<button type="submit" class="btn btn-success">Test Connection</button>
