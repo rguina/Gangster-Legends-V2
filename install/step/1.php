@@ -1,5 +1,8 @@
 <?php
-	
+
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+
 	if (
 		isset($_POST["host"]) && 
 		isset($_POST["user"]) && 
@@ -8,7 +11,7 @@
 	) {
 
 		try {
-			$test = NEW PDO("mysql:host=" . $_POST["host"] . ";dbname=" . $_POST["database"], $_POST["user"], $_POST["pass"]);
+			$test = NEW PDO("mysql:host=" . $_POST["host"] . ";dbname=" . $_POST["database"] . ";charset=utf8", $_POST["user"], $_POST["pass"], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
 			$configFile = '<?php
 
@@ -28,7 +31,7 @@
 			file_put_contents("../config.php", str_replace("	", "", $configFile));
 
 		} catch (Exception $e) {
-			echo "failed";
+			echo "failed<br><strong>Error:</strong> " . $e->getMessage();
 		}
 
 	}
@@ -41,6 +44,7 @@
 		echo "<ol><li>Config file created!</li></ol>";
 	} catch (Exception $e) {
 		failed(1, "Database Login");
+		echo '<div class="alert alert-danger"><strong>Connection Error:</strong> ' . $e->getMessage() . '</div>';
 
 		echo '
 			<div class="panel panel-default">
