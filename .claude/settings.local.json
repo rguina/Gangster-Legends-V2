@@ -1,8 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(php -v)",
-      "Bash(php -i)"
+      "Bash(php \"C:\\laragon\\www\\Gangster-Legends-V2\\test_connection.php\")"
     ],
     "deny": [],
     "ask": []

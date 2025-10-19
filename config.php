@@ -6,8 +6,8 @@
 
     $config["db"] = array(
         "host" => "localhost", 
-        "database" => "",
-        "user" => "",
+        "database" => "gangster",
+        "user" => "root",
         "pass" => ""
     );
 

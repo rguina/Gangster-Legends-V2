@@ -12,10 +12,11 @@
 
 		try {
 			$options = array(
-				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
 			);
-			$test = NEW PDO("mysql:host=" . $_POST["host"] . ";dbname=" . $_POST["database"], $_POST["user"], $_POST["pass"], $options);
-			$test->exec("SET NAMES utf8mb4");
+			$dsn = "mysql:host=" . $_POST["host"] . ";dbname=" . $_POST["database"];
+			$test = NEW PDO($dsn, $_POST["user"], $_POST["pass"], $options);
 
 			$configFile = '<?php
 
