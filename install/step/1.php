@@ -52,19 +52,19 @@
 					<form method="post" action="#">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Hostname</label>
-							<input type="text" class="form-control" name="host" value="localhost">
+							<input type="text" class="form-control" name="host" value="<?php echo isset($_POST["host"]) ? htmlspecialchars($_POST["host"]) : "localhost"; ?>">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Username</label>
-							<input type="text" class="form-control" name="user">
+							<input type="text" class="form-control" name="user" value="<?php echo isset($_POST["user"]) ? htmlspecialchars($_POST["user"]) : ""; ?>">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Password</label>
-							<input type="password" class="form-control" name="pass">
+							<input type="password" class="form-control" name="pass" value="<?php echo isset($_POST["pass"]) ? htmlspecialchars($_POST["pass"]) : ""; ?>">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Database</label>
-							<input type="text" class="form-control" name="database">
+							<input type="text" class="form-control" name="database" value="<?php echo isset($_POST["database"]) ? htmlspecialchars($_POST["database"]) : ""; ?>">
 						</div>
 						<div class="text-right">
 							<button type="submit" class="btn btn-success">Test Connection</button>
