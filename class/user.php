@@ -8,7 +8,7 @@
 
     class user {
         
-        public $id, $info, $name, $db, $loggedin = false, $nextRank, $user, $attackPower = 100, $defensePower = 100;
+        public $id, $info, $name, $db, $loggedin = false, $nextRank, $user, $attackPower = 100, $defensePower = 100, $rank, $adminModules;
         
         // Pass the ID to the class
         function __construct($id = FALSE, $name = FALSE) {

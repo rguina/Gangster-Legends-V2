@@ -6,7 +6,7 @@
 
 	class Items {
 
-		public $settings, $types, $db;
+		public $settings, $types, $db, $page;
 
 		public function __construct() {
 			global $db, $page;
